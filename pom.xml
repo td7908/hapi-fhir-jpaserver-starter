@@ -22,11 +22,12 @@
 
     <properties>
         <java.version>17</java.version>
+
+        <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
+        <spring-security-oauth2.version>2.5.2.RELEASE</spring-security-oauth2.version>
+        <spring-version>3.2.6</spring-version>
     </properties>
 
-    <prerequisites>
-        <maven>3.8.3</maven>
-    </prerequisites>
 
     <name>HAPI FHIR JPA Server - Starter Project</name>
 
@@ -52,6 +53,44 @@
     </dependencyManagement>
 
     <dependencies>
+        <!--Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring-version}</version> <!-- Aligns with Spring Boot version -->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <version>${spring-version}</version> <!-- Aligns with Spring Boot version -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.tadejd.dipllib</groupId>
+            <artifactId>abac-connect</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!--For binding SecurityProperties-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!--ABAC-->
+        <dependency>
+            <groupId>care.better.abac</groupId>
+            <artifactId>better-abac-integration</artifactId>
+            <version>1.0.10-SNAPSHOT</version>
+        </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -441,6 +480,7 @@
                 <version>3.13.0</version>
                 <configuration>
                     <release>${java.version}</release>
+                    <parameters>true</parameters>
                 </configuration>
             </plugin>
 
